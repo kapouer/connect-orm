@@ -21,7 +21,7 @@ module.exports = function(connect) {
 
 	/**
 	 * Initialize Store with the given `options`.
-	 * 
+	 *
 	 * @param {ORM} db
 	 * @param {Object} options
 	 * @api public
@@ -38,6 +38,7 @@ module.exports = function(connect) {
 			},
 			expires: {
 				type: 'date',
+				time: true,
 				index: true
 			},
 			session: Object
@@ -45,7 +46,7 @@ module.exports = function(connect) {
 			table: options.table || defaults.table
 		});
 		Session.sync(); // TODO callback
-		
+
 		// destroy all expired sessions after each create/update
 		Session.afterSave = function(next) {
 			Session.find({ expires: db.lte(new Date()) }).remove(next);
@@ -65,7 +66,7 @@ module.exports = function(connect) {
 	 * @param {Function} callback
 	 * @api public
 	 */
-	
+
 	Store.prototype.get = function(sid, callback) {
 		callback = callback || noop;
 		this.Session.one({sid: sid}, function(err, session) {
@@ -152,6 +153,6 @@ module.exports = function(connect) {
 	Store.prototype.clear = function(callback) {
 		this.Session.all().remove(callback);
 	};
-	
+
 	return Store;
 };
