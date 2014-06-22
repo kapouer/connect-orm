@@ -2,7 +2,7 @@
   "name": "connect-orm",
   "version": "0.1.0",
   "description": "orm session store for Connect",
-  "keywords": ["connect", "session", "express"],
+  "keywords": ["connect", "session", "express", "orm"],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
