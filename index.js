@@ -15,9 +15,9 @@ var defaults = {
 
 function noop() {}
 
-module.exports = function(connect) {
+module.exports = function(session) {
 	"use strict";
-	var ConnectStore = connect.session.Store;
+	var Store = session.Store || session.session && session.session.Store;
 
 	/**
 	 * Initialize Store with the given `options`.
