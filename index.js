@@ -1,6 +1,6 @@
 /*!
  * connect-orm
- * Copyright 2013 Jérémy Lal <kapouer@melix.org>
+ * Copyright 2013-2014 Jérémy Lal <kapouer@melix.org>
  * MIT Licensed, see LICENSE file
  */
 
