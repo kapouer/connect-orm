@@ -1,6 +1,6 @@
 {
   "name": "connect-orm",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "orm session store for Connect",
   "keywords": ["connect", "session", "express"],
   "main": "index.js",
