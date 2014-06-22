@@ -20,16 +20,16 @@ module.exports = function(session) {
 	var Store = session.Store || session.session && session.session.Store;
 
 	/**
-	 * Initialize Store with the given `options`.
+	 * Initialize OrmStore with the given `options`.
 	 *
 	 * @param {ORM} db
 	 * @param {Object} options
 	 * @api public
 	 */
 
-	function Store(db, options) {
+	function OrmStore(db, options) {
 		options = options || {};
-		ConnectStore.call(this, options);
+		Store.call(this, options);
 		this.maxAge = options.maxAge || defaults.maxAge;
 		var Session = this.Session = db.define('Session', {
 			sid: {
@@ -57,7 +57,7 @@ module.exports = function(session) {
 	 * Inherit from `Store`.
 	 */
 
-	require('util').inherits(Store, ConnectStore);
+	require('util').inherits(OrmStore, Store);
 
 	/**
 	 * Attempt to fetch session by the given `sid`.
@@ -67,7 +67,7 @@ module.exports = function(session) {
 	 * @api public
 	 */
 
-	Store.prototype.get = function(sid, callback) {
+	OrmStore.prototype.get = function(sid, callback) {
 		callback = callback || noop;
 		this.Session.one({sid: sid}, function(err, session) {
 			if (err) return callback(err);
@@ -89,7 +89,7 @@ module.exports = function(session) {
 	 * @api public
 	 */
 
-	Store.prototype.set = function(sid, session, callback) {
+	OrmStore.prototype.set = function(sid, session, callback) {
 		callback = callback || noop;
 		var s = {
 			session: session
@@ -123,7 +123,7 @@ module.exports = function(session) {
 	 * @api public
 	 */
 
-	Store.prototype.destroy = function(sid, callback) {
+	OrmStore.prototype.destroy = function(sid, callback) {
 		callback = callback || noop;
 		this.Session.one({sid: sid}, function(err, session) {
 			if (err) return callback(err);
@@ -139,7 +139,7 @@ module.exports = function(session) {
 	 * @api public
 	 */
 
-	Store.prototype.length = function(callback) {
+	OrmStore.prototype.length = function(callback) {
 		this.Session.count(callback);
 	};
 
@@ -150,9 +150,9 @@ module.exports = function(session) {
 	 * @api public
 	 */
 
-	Store.prototype.clear = function(callback) {
+	OrmStore.prototype.clear = function(callback) {
 		this.Session.all().remove(callback);
 	};
 
-	return Store;
+	return OrmStore;
 };
