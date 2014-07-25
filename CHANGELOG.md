@@ -1,3 +1,8 @@
+connect-orm (0.1.2)
+===================
+
+* forgot to require orm
+
 connect-orm (0.1.1)
 ===================
 
