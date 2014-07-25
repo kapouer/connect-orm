@@ -4,6 +4,8 @@
  * MIT Licensed, see LICENSE file
  */
 
+var orm = require('orm');
+
 /**
  * Default options
  */
