@@ -43,14 +43,16 @@ module.exports = function(session) {
 			},
 			session: Object
 		}, {
-			table: options.table || defaults.table
+			table: options.table || defaults.table,
+			hooks: {
+				afterSave: function(success) {
+					Session.find({ expires: orm.lte(new Date()) }).remove(function(err) {
+						if (err) console.error(err);
+					});
+				}
+			}
 		});
 		Session.sync(); // TODO callback
-
-		// destroy all expired sessions after each create/update
-		Session.afterSave = function(next) {
-			Session.find({ expires: db.lte(new Date()) }).remove(next);
-		};
 	}
 
 	/**
