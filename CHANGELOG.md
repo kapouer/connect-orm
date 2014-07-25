@@ -1,3 +1,8 @@
+connect-orm (0.1.1)
+===================
+
+* fix afterSave hook declaration
+
 connect-orm (0.1.0)
 ===================
 
